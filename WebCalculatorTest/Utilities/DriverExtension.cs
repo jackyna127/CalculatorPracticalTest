@@ -29,6 +29,7 @@ namespace WebCalculatorTest.Utilities
                     break;
                 case "FIREFOX":
                     webDriver = new FirefoxDriver();
+                    webDriver.Navigate().GoToUrl(baseUrl);
                     break;
                 default:
                     Loggers.Log("Failed initializing driver, browser :" + BrowserType,"FATAL");                   
