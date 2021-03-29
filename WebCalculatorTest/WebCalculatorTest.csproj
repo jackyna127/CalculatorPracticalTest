@@ -1,0 +1,59 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
+    <Copy SourceFiles="app.config" DestinationFiles="$(OutDir)\testhost.dll.config" />
+    <Copy SourceFiles="app.config" DestinationFiles="$(OutDir)\testhost.x86.dll.config" />
+  </Target>
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="log4net" Version="2.0.12" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.2.3" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.2.3" />
+    <PackageReference Include="Selenium.Firefox.WebDriver" Version="0.27.0" />
+    <PackageReference Include="Selenium.Support" Version="3.141.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="89.0.4389.2300" />
+    <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.150.1.2" />
+    <PackageReference Include="SpecFlow" Version="3.7.38" />
+    <PackageReference Include="SpecFlow.MsTest" Version="3.7.38" />
+    
+
+    
+
+    
+
+    
+
+    
+    <PackageReference Include="FluentAssertions" Version="5.10.3" />
+    
+
+    
+
+    
+
+    
+
+    
+    <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.7.38" />
+    
+
+    
+
+    
+
+    
+
+    
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
+    
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Hooks\" />
+  </ItemGroup>
+
+</Project>

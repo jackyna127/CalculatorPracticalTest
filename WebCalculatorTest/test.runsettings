@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <!-- Parameters used by tests at runtime. These are required as a substitute for TFS/MTM test settings.-->
+  <!-- File instructions: https://msdn.microsoft.com/en-us/library/jj635153.aspx#example -->
+  <!-- TFS instructions: https://blogs.msdn.microsoft.com/visualstudioalm/2015/09/04/supplying-run-time-parameters-to-tests/ -->
+  <TestRunParameters>
+    <Parameter name="Browser" value="Chrome" />
+  </TestRunParameters>
+</RunSettings>
