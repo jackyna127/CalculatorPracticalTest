@@ -60,7 +60,8 @@ namespace WebCalculatorTest.StepDefinitions
         public void ThenHeWillSeeTheCalculateOnTheWebPage(int expectedResult)
         {
             int actualResult = calculatePage.GetCalculateResult();
-            Assert.AreEqual(expectedResult, actualResult, "The expected result is different from actual result");//todo
+            Assert.AreEqual(expectedResult, actualResult, 
+                $"Expected result: {expectedResult}, Web calculator returns actual result: {actualResult}.");
         }
         
         [Then(@"he will see the error (.*) on the web page")]
@@ -69,7 +70,7 @@ namespace WebCalculatorTest.StepDefinitions
             //todo, need the requirement when invalid input for calculator, for now, just assuming it would return an error message.
             string actualMessage = "";
             Assert.AreEqual(expectedMessage, actualMessage,
-               $"Web calculator returns unexpected result: expected result {expectedMessage}, actual result: {actualMessage}.");
+               $"Expected result {expectedMessage}, eb calculator returns actual result: {actualMessage}.");
         }
     }
 }

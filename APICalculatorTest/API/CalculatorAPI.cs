@@ -1,4 +1,5 @@
-﻿using APICalculatorTest.Utilities;
+﻿using APICalculatorTest.Models;
+using APICalculatorTest.Utilities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
@@ -7,19 +8,8 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text;
 
-namespace APICalculatorTest.Models
-{
-    public class CalculatorAPIRequest
-    {
-        public int LeftNumber;
-        public int RightNumber;
-        public string Operator;
-    }
-    public class CalculatorAPIResponse
-    {
-        public int calculateResult;
-    }
-
+namespace APICalculatorTest.API
+{    
     public class CalculatorAPI : APIBase
     {
         string authToken = "";

@@ -1,4 +1,4 @@
-﻿using APICalculatorTest.Models;
+﻿using APICalculatorTest.API;
 using APICalculatorTest.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;

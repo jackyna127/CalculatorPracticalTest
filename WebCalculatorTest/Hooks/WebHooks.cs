@@ -69,9 +69,6 @@ namespace WebCalculatorTest.Hooks
             }          
            
         }
-
-
-
     }
 }
 
