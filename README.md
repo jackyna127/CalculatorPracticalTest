@@ -5,14 +5,14 @@ There are 2 projects in the solution:
 1. WebCalculatorTest: it is an BBD automated framework project for Web testing with multiple browser, specflow, selenium web driver and MsTest in Visual Studio 2019. 
 2. APICalculatorTest: it is an automated framework project for REST API about RestSharp and MsTest in Visual Studio 2019. 
 
-Reminder for executing automation testing：
-When execute WebCalculatorTest locally, need choose run.settings file (Test -> Configure Run Settings ->Select Solution Wide runsettings file) in Visual Studio 2019, otherswise, might get error due to no selected run.settings file.(using run.settings file to select Browser)
+Reminder for executing：
+When execute WebCalculatorTest locally, need choose run.settings file (Test -> Configure Run Settings ->Select Solution Wide runsettings file) in Visual Studio 2019, otherswise, might get error due to no selected run.settings file.( using run.settings file to select Browser:Chrome, IE, Firefox)
 
 Test Scenarios:
-1.Web & API: Test all left number and right number in all range（Web: -99 to 999, API： from int minvalue to int maximum)
-2.Web & API: Test all operators("+","-","*","/")
-3.Web & API: Test possible invalid input including out of range, string, special characters, and no number entering etc.
-4.API:No AuthToken for API calculater, wrong josn request body and etc.
+* Web & API: Test all left number and right number in all range（Web: -99 to 999, API： from int minvalue to int maximum)
+* Web & API: Test all operators("+","-","*","/")
+* Web & API: Test possible invalid input including out of range, string, special characters, and no number entering etc.
+*API:No AuthToken for API calculater, wrong josn request body and etc.
 
 Observation:
 1. Web Calculator:
