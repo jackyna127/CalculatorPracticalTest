@@ -4,6 +4,7 @@ using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using WebCalculatorTest.Utilities;
 
 namespace APICalculatorTest.Utilities
 {
@@ -16,7 +17,6 @@ namespace APICalculatorTest.Utilities
             url = baseUrl;
         }
         private RestRequest restRequest = new RestRequest();   
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         protected virtual void AddRequestHeader(string key, string value)
         {
             restRequest.AddOrUpdateParameter(key, value, ParameterType.HttpHeader);
@@ -42,15 +42,13 @@ namespace APICalculatorTest.Utilities
             try
             {
                 var restClient = new RestClient(url);
-                var response = restClient.Execute(restRequest);
-
-                log.Info(DateTime.Now + ":send a request to endpoint " + url + ", and paramenters:" + restRequest.Parameters.ToString());
-                log.Info(DateTime.Now + " the response status code: " + response.StatusCode + ", content:" + response.Content);
-
+                var response = restClient.Execute(restRequest);               
+                Loggers.Log("The response status code: " + response.StatusCode + ", content:" + response.Content);
                 return response;
             }
             catch (Exception e)
             {
+                Loggers.Log("Send a request failed with error message:" + e.Message, "Error");
                 throw new Exception("Send a request failed with error message:" + e.Message);
             }
         }
@@ -60,15 +58,13 @@ namespace APICalculatorTest.Utilities
             try
             {
                 var restClient = new RestClient(url);
-                var response = restClient.Execute(restRequest);
-
-                log.Info(DateTime.Now + ":send a request to endpoint " + url + ", and paramenters:" + restRequest.Parameters.ToString());
-                log.Info(DateTime.Now + " the response status code: " + response.StatusCode + ", content:" + response.Content);
-
+                var response = restClient.Execute(restRequest);               
+                Loggers.Log(" the response status code: " + response.StatusCode + ", content:" + response.Content);
                 return JsonConvert.DeserializeObject<T>(response.Content);
             }
             catch (Exception e)
             {
+                Loggers.Log("Send a request failed with error message:" + e.Message,"Error");
                 throw new Exception("Send a request failed with error message:" + e.Message);
             }
         }

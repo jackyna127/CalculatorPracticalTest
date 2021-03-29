@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Text;
+using WebCalculatorTest.Utilities;
 
 namespace APICalculatorTest.API
 {    
@@ -27,14 +28,16 @@ namespace APICalculatorTest.API
                 RightNumber = inputRightNumber,
                 Operator = selectedOperator
             };
-            
+            Loggers.Log($"inputLeftNumber:{inputLeftNumber}, selectOperator: {selectedOperator},inputLeftNumber: {inputRightNumber}");
             SetAuthenticationHeader(authToken);           
             SetMethod(Method.POST);
             AddJsonBody(JsonConvert.SerializeObject(requestBody));
             CalculatorAPIResponse response = Execute<CalculatorAPIResponse>();
             //When nothing return
-            if(response == null)
-                throw new Exception($"No response from server, please check restquest: {requestBody}.");
+            if (response == null)
+            {
+                Loggers.Log("No response data from server, please check restquest:" + requestBody.ToString(), "Error");                
+            }
             return response.calculateResult;
         }
 
@@ -47,27 +50,33 @@ namespace APICalculatorTest.API
                 RightNumber = inputRightNumber,
                 Operator = selectedOperator
             };
+            Loggers.Log($"inputLeftNumber:{inputLeftNumber}, selectOperator: {selectedOperator},inputLeftNumber: {inputRightNumber}");
             SetMethod(Method.POST);
             AddJsonBody(JsonConvert.SerializeObject(requestBody));
             var response = ExecuteNonFunctionCheck<CalculatorAPIRequest>();
             //When nothing return
             if (response == null)
-                throw new Exception($"No response from server, please check restquest: {requestBody}.");
+            {
+                Loggers.Log("No response data from server, please check restquest:" + requestBody.ToString(), "Error");                
+            }
             return response;
         }
 
-        public IRestResponse ExecuteCalculate<T>(T restRequestBody)
+        public IRestResponse ExecuteCalculate<T>(T requestBody)
         {
             SetAuthenticationHeader(authToken);
             SetMethod(Method.POST);
-            AddJsonBody(JsonConvert.SerializeObject(restRequestBody));
+            AddJsonBody(JsonConvert.SerializeObject(requestBody));
+            Loggers.Log($"Request Body:{requestBody}");
             var response = ExecuteNonFunctionCheck<T>();
             //When nothing return
             if (response == null)
-                throw new Exception($"No response data from server, please check restquest: {restRequestBody}.");
+            {
+                Loggers.Log("No response data from server, please check restquest:" + requestBody.ToString(), "Error");               
+            }
             return response;
         }
-       
+
     }
 
 

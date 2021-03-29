@@ -3,14 +3,14 @@ using OpenQA.Selenium;
 using System;
 using TechTalk.SpecFlow;
 using WebCalculatorTest.Pages;
+using WebCalculatorTest.Utilities;
 
 namespace WebCalculatorTest.StepDefinitions
 {
     [Binding]
     public class WebCalculatorTestScenariosSteps
     {
-        CalculatePage calculatePage; 
-
+        CalculatePage calculatePage;
         public WebCalculatorTestScenariosSteps(ScenarioContext scenarioContext)
         {
             int secondTimeOut = (int)scenarioContext["secondTimeOut"];
@@ -28,6 +28,7 @@ namespace WebCalculatorTest.StepDefinitions
         public void GivenHeEntersTheLeftNumber(string leftNumber)
         {
             calculatePage.EnterLeftNumber(leftNumber);
+            Loggers.Log("Enter Left number:" + leftNumber);
         }
         [Given(@"he chooses the operator (.*)")]
         public void GivenHeChoosesTheOperator(string selectOperator)
@@ -36,12 +37,14 @@ namespace WebCalculatorTest.StepDefinitions
             {
                 calculatePage.SelectOperator(selectOperator);
             }
+            Loggers.Log("Select operator: " + selectOperator);
         }
 
         [Given(@"he enters the right number (.*)")]
         public void GivenHeEntersTheRightNumber(string rightNumber)
         {
             calculatePage.EnterRightNumber(rightNumber);
+            Loggers.Log("Enter Right Number: " + rightNumber);
         }
         
         [Given(@"the user accidentally triggers with Scenario (.*)")]
@@ -60,8 +63,8 @@ namespace WebCalculatorTest.StepDefinitions
         public void ThenHeWillSeeTheCalculateOnTheWebPage(int expectedResult)
         {
             int actualResult = calculatePage.GetCalculateResult();
-            Assert.AreEqual(expectedResult, actualResult, 
-                $"Expected result: {expectedResult}, Web calculator returns actual result: {actualResult}.");
+            Loggers.Log("Expected result:" + expectedResult + ", actual result: " +  actualResult);
+            Assert.AreEqual(expectedResult, actualResult,"Expected result:" + expectedResult +" , actual result: " + actualResult + ". More infomation please check the logs");
         }
         
         [Then(@"he will see the error (.*) on the web page")]
@@ -70,7 +73,7 @@ namespace WebCalculatorTest.StepDefinitions
             //todo, need the requirement when invalid input for calculator, for now, just assuming it would return an error message.
             string actualMessage = "";
             Assert.AreEqual(expectedMessage, actualMessage,
-               $"Expected result {expectedMessage}, eb calculator returns actual result: {actualMessage}.");
+               $"Expected result {expectedMessage}, actual result: {actualMessage}. More infomation please check the logs");
         }
     }
 }

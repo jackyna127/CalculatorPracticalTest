@@ -19,7 +19,13 @@ namespace WebCalculatorTest.Utilities
         protected virtual void WaitUntilValueIsPopulated(By element)
         {
             WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(secondTimeout));
-            wait.Until(d => webDriver.FindElement(@element).GetAttribute("value") != "");
+            try { 
+                wait.Until(d => webDriver.FindElement(@element).GetAttribute("value") != "");
+            }
+            catch(Exception e)
+            {
+                Loggers.Log("Wait unitl element value changed failed: " + e.Message, "Error");
+            }
         }
        
         protected virtual void EnterInputText(By element, string textValue)

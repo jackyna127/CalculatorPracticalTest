@@ -55,7 +55,7 @@ namespace APICalculatorTest.Test
         {
             var actualResult = calculatorAPI.ExecuteCalculate(leftNumber, rightNumber, calculateOperator);
             Assert.AreEqual(expectedResult, actualResult,
-                $"Expected result:{expectedResult}, Calculator API returned actual result: {actualResult}.");
+                "Expected result:" + expectedResult + ", Actual result: " + actualResult + ". More information please check log file");
         }
 
         [TestMethod]
@@ -70,7 +70,7 @@ namespace APICalculatorTest.Test
         {
             var actualResult = calculatorAPI.ExecuteCalculate(leftNumber, rightNumber, calculateOperator);
             Assert.AreEqual(expectedResult, actualResult,
-                $"Expected result:{expectedResult}, Calculator API returned actual result: {actualResult}.");
+                "Expected result:" + expectedResult + ", Actual result: " + actualResult + ". More information please check log file");
         }
 
         [TestMethod]
@@ -80,7 +80,7 @@ namespace APICalculatorTest.Test
         {
             var actualResult = calculatorAPI.ExecuteCalculate(leftNumber, rightNumber, calculateOperator);
             Assert.AreEqual(expectedResult, actualResult,
-                $"Expected result:{expectedResult},Calculator API returned actual result:{actualResult}.");
+                "Expected result:" + expectedResult + ", Actual result: " + actualResult + ". More information please check log file");
         }
         [TestMethod]
         //Test no auth token 
@@ -89,7 +89,7 @@ namespace APICalculatorTest.Test
         {
             var actualResponse = calculatorAPI.ExecuteCalculate(leftNumber, rightNumber, calculateOperator,false);
             Assert.AreEqual(expectedResult, actualResponse.StatusCode,
-                $"Expected response status code: {expectedResult}, Calculator API returned actual response status code: {actualResponse.StatusCode}.");
+                "Expected result:" + expectedResult + ", Actual result: " + actualResponse.StatusCode + ". More information please check log file");
         }
 
         [TestMethod]
@@ -105,7 +105,7 @@ namespace APICalculatorTest.Test
             };
             var actualResponse = calculatorAPI.ExecuteCalculate<object>(request);           
             Assert.AreEqual(expectedResult, actualResponse.StatusCode,
-                $"Expected response status code: {expectedResult},Calculator API returned actual response status code: {actualResponse.StatusCode}.");
+                "Expected result:" + expectedResult + ", Actual result: " + actualResponse.StatusCode + ". More information please check log file");
         }
 
         [TestMethod]
@@ -120,7 +120,7 @@ namespace APICalculatorTest.Test
             };
             var actualResponse = calculatorAPI.ExecuteCalculate<object>(request);            
             Assert.AreEqual(expectedResult, actualResponse.StatusCode,
-                $"Expected response status code: {expectedResult}, Calculator API returned actual response status code: {actualResponse.StatusCode}.");
+                "Expected result:" + expectedResult + ", Actual result: " + actualResponse.StatusCode + ". More information please check log file");
         }
 
         [TestMethod]
@@ -135,7 +135,7 @@ namespace APICalculatorTest.Test
             };
             var actualResponse = calculatorAPI.ExecuteCalculate<object>(request);            
             Assert.AreEqual(expectedResult, actualResponse.StatusCode,
-                $"Expected response status code: {expectedResult}, Calculator API returned actual response status code: {actualResponse.StatusCode}.");
+                "Expected result:" + expectedResult + ", Actual result: " + actualResponse.StatusCode + ". More information please check log file");
         }
 
         [TestCleanup]

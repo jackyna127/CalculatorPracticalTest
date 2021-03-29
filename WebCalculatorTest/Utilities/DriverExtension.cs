@@ -12,15 +12,7 @@ namespace WebCalculatorTest.Utilities
     {
         public static IWebDriver OpenBrowser(string BrowserType, string baseUrl, int secondTimeout)
         {
-            IWebDriver webDriver = null;
-            if (string.IsNullOrEmpty(BrowserType))
-            { 
-                throw new Exception("Driver type is not provided. Please check test setting file.");
-            }
-            if (string.IsNullOrEmpty(baseUrl))
-            {
-                throw new Exception("URL is not provided. Please check test setting file.");
-            }
+            IWebDriver webDriver = null;           
             switch (BrowserType.ToUpper())
             {
                 
@@ -39,8 +31,8 @@ namespace WebCalculatorTest.Utilities
                     webDriver = new FirefoxDriver();
                     break;
                 default:
-                    throw new Exception($"Failed initializing driver. " +  $"Given driver type {BrowserType} is not supported.");
-
+                    Loggers.Log("Failed initializing driver, browser :" + BrowserType,"FATAL");                   
+                    break;
             }
             webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(secondTimeout);
             return webDriver;
