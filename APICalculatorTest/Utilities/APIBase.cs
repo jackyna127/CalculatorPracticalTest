@@ -8,7 +8,7 @@ using WebCalculatorTest.Utilities;
 
 namespace APICalculatorTest.Utilities
 {
-    public class APIBase
+    public abstract class APIBase
     {
         private string url="";
 
@@ -37,7 +37,7 @@ namespace APICalculatorTest.Utilities
             restRequest.Method = method;
         }
 
-        protected virtual IRestResponse ExecuteNonFunctionCheck<T>()
+        protected virtual IRestResponse Execute<T>()
         {
             try
             {
@@ -51,22 +51,6 @@ namespace APICalculatorTest.Utilities
                 Loggers.Log("Send a request failed with error message:" + e.Message, "Error");
                 throw new Exception("Send a request failed with error message:" + e.Message);
             }
-        }
-
-        protected virtual T Execute<T>()
-        {
-            try
-            {
-                var restClient = new RestClient(url);
-                var response = restClient.Execute(restRequest);               
-                Loggers.Log(" the response status code: " + response.StatusCode + ", content:" + response.Content);
-                return JsonConvert.DeserializeObject<T>(response.Content);
-            }
-            catch (Exception e)
-            {
-                Loggers.Log("Send a request failed with error message:" + e.Message,"Error");
-                throw new Exception("Send a request failed with error message:" + e.Message);
-            }
-        }
+        }       
     }
 }

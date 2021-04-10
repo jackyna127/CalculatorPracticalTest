@@ -6,7 +6,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace WebCalculatorTest.Utilities
 {
-    public class PageBase
+    public abstract class PageBase
     {
         int secondTimeout = 10;
         protected IWebDriver webDriver;

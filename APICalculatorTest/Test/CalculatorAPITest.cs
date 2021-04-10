@@ -15,6 +15,7 @@ namespace APICalculatorTest.Test
 {
     [TestClass]
     [TestCategory("API")]
+    //Example for using MSTest as unit test
     public class CalculatorAPITest
     {
         private CalculatorAPI calculatorAPI;
@@ -54,8 +55,7 @@ namespace APICalculatorTest.Test
         public void CalculateAPI_PositiveTests(int leftNumber, int rightNumber, string calculateOperator, int expectedResult)
         {
             var actualResult = calculatorAPI.ExecuteCalculate(leftNumber, rightNumber, calculateOperator);
-            Assert.AreEqual(expectedResult, actualResult,
-                "Expected result:" + expectedResult + ", Actual result: " + actualResult + ". More information please check log file");
+            VerifyTestResult<int>(expectedResult, actualResult);
         }
 
         [TestMethod]
@@ -69,8 +69,7 @@ namespace APICalculatorTest.Test
         public void CalculateAPI_BoundaryTests(int leftNumber, int rightNumber, string calculateOperator, int expectedResult)
         {
             var actualResult = calculatorAPI.ExecuteCalculate(leftNumber, rightNumber, calculateOperator);
-            Assert.AreEqual(expectedResult, actualResult,
-                "Expected result:" + expectedResult + ", Actual result: " + actualResult + ". More information please check log file");
+            VerifyTestResult<int>(expectedResult, actualResult);
         }
 
         [TestMethod]
@@ -79,21 +78,19 @@ namespace APICalculatorTest.Test
         public void CalculateAPI_NegativeTests(int leftNumber, int rightNumber, string calculateOperator, int expectedResult)
         {
             var actualResult = calculatorAPI.ExecuteCalculate(leftNumber, rightNumber, calculateOperator);
-            Assert.AreEqual(expectedResult, actualResult,
-                "Expected result:" + expectedResult + ", Actual result: " + actualResult + ". More information please check log file");
-        }
+            VerifyTestResult<int>(expectedResult, actualResult);
+          }
         [TestMethod]
         //Test no auth token 
         [DataRow(1, 1, "/", HttpStatusCode.Unauthorized)]
         public void CalculateAPI_NoAuthToken(int leftNumber, int rightNumber, string calculateOperator, HttpStatusCode expectedResult)
         {
             var actualResponse = calculatorAPI.ExecuteCalculate(leftNumber, rightNumber, calculateOperator,false);
-            Assert.AreEqual(expectedResult, actualResponse.StatusCode,
-                "Expected result:" + expectedResult + ", Actual result: " + actualResponse.StatusCode + ". More information please check log file");
+            VerifyTestResult<HttpStatusCode>(expectedResult, actualResponse.StatusCode);
         }
 
-        [TestMethod]
-        //Input char as left number 
+        [TestMethod]     
+        //Test input char as left number
         [DataRow('O', 1, "/", HttpStatusCode.InternalServerError)]
         public void CalculateAPI_InputChar(char leftNumber, int rightNumber, string calculateOperator, HttpStatusCode expectedResult)
         {
@@ -103,13 +100,12 @@ namespace APICalculatorTest.Test
                 RightNumber=rightNumber,
                 Operator = calculateOperator
             };
-            var actualResponse = calculatorAPI.ExecuteCalculate<object>(request);           
-            Assert.AreEqual(expectedResult, actualResponse.StatusCode,
-                "Expected result:" + expectedResult + ", Actual result: " + actualResponse.StatusCode + ". More information please check log file");
+            var actualResponse = calculatorAPI.ExecuteCalculate<object>(request);
+            VerifyTestResult<HttpStatusCode>(expectedResult, actualResponse.StatusCode);
         }
 
-        [TestMethod]
-        //Input char as left number 
+        [TestMethod]       
+        //Test no oprator
         [DataRow(2, 1, HttpStatusCode.InternalServerError)]
         public void CalculateAPI_NoOperator(int leftNumber, int rightNumber, HttpStatusCode expectedResult)
         {
@@ -118,26 +114,31 @@ namespace APICalculatorTest.Test
                 LeftNumber = leftNumber,
                 RightNumber = rightNumber
             };
-            var actualResponse = calculatorAPI.ExecuteCalculate<object>(request);            
-            Assert.AreEqual(expectedResult, actualResponse.StatusCode,
-                "Expected result:" + expectedResult + ", Actual result: " + actualResponse.StatusCode + ". More information please check log file");
+            var actualResponse = calculatorAPI.ExecuteCalculate<object>(request);
+            VerifyTestResult<HttpStatusCode>(expectedResult, actualResponse.StatusCode);
         }
 
         [TestMethod]
-        //Input char as left number 
-        [DataRow(26.12, 1, HttpStatusCode.InternalServerError)]
-        public void CalculateAPI_Double(double leftNumber, int rightNumber, HttpStatusCode expectedResult)
+        //Input char as double number 
+        [DataRow(26.12, 1, "+", HttpStatusCode.InternalServerError)]
+        public void CalculateAPI_Double(double leftNumber, int rightNumber, string calculatorOperator,HttpStatusCode expectedResult)
         {
             object request = new
             {
                 LeftNumber = leftNumber,
-                RightNumber = rightNumber
+                RightNumber = rightNumber,
+                Operator = calculatorOperator
             };
-            var actualResponse = calculatorAPI.ExecuteCalculate<object>(request);            
-            Assert.AreEqual(expectedResult, actualResponse.StatusCode,
-                "Expected result:" + expectedResult + ", Actual result: " + actualResponse.StatusCode + ". More information please check log file");
+            var actualResponse = calculatorAPI.ExecuteCalculate<object>(request);
+            VerifyTestResult<HttpStatusCode>(expectedResult, actualResponse.StatusCode);
         }
+        
+        public void VerifyTestResult<T>(T expectedResult, T actualResult)
+        {
+            Assert.AreEqual(expectedResult, actualResult,
+             "Expected result:" + expectedResult + ", Actual result: " + actualResult + ". More information please check log file");
 
+        }
         [TestCleanup]
         public void TearDown()
         {

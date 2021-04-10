@@ -32,13 +32,14 @@ namespace APICalculatorTest.API
             SetAuthenticationHeader(authToken);           
             SetMethod(Method.POST);
             AddJsonBody(JsonConvert.SerializeObject(requestBody));
-            CalculatorAPIResponse response = Execute<CalculatorAPIResponse>();
+            var response = Execute<CalculatorAPIResponse>();
             //When nothing return
             if (response == null)
             {
                 Loggers.Log("No response data from server, please check restquest:" + requestBody.ToString(), "Error");                
             }
-            return response.calculateResult;
+            var result = JsonConvert.DeserializeObject<CalculatorAPIResponse>(response.Content);
+            return result.calculateResult;
         }
 
         
@@ -53,7 +54,7 @@ namespace APICalculatorTest.API
             Loggers.Log($"inputLeftNumber:{inputLeftNumber}, selectOperator: {selectedOperator},inputLeftNumber: {inputRightNumber}");
             SetMethod(Method.POST);
             AddJsonBody(JsonConvert.SerializeObject(requestBody));
-            var response = ExecuteNonFunctionCheck<CalculatorAPIRequest>();
+            var response = Execute<CalculatorAPIRequest>();
             //When nothing return
             if (response == null)
             {
@@ -68,7 +69,7 @@ namespace APICalculatorTest.API
             SetMethod(Method.POST);
             AddJsonBody(JsonConvert.SerializeObject(requestBody));
             Loggers.Log($"Request Body:{requestBody}");
-            var response = ExecuteNonFunctionCheck<T>();
+            var response = Execute<T>();
             //When nothing return
             if (response == null)
             {
